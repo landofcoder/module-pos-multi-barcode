@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+        <title>Preview Multi Barcode</title>
+    </head>
+    <referenceContainer name="content">
+        <block class="Lof\MultiBarcode\Block\Adminhtml\MultiBarcode\Preview" name="lof_multibarcode_multibarcode_preview" template="Lof_MultiBarcode::preview.phtml"/>
+    </referenceContainer>
+</page>

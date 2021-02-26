@@ -1,0 +1,25 @@
+{
+    "name": "lof/module-multibarcode",
+    "description": "",
+    "type": "magento2-module",
+    "license": "MIT",
+    "authors": [
+        {
+            "email": "info@mage2gen.com",
+            "name": "Mage2Gen"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "picqer/php-barcode-generator": "*",
+        "mpdf/mpdf": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lof\\MultiBarcode\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

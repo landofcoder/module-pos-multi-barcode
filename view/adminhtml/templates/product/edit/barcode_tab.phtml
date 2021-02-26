@@ -1,0 +1,93 @@
+<?php
+/**
+ * Landofcoder
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.landofcoder.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Landofcoder
+ * @package    Lof_MultiBarcode
+ * @copyright  Copyright (c) 2020 Landofcoder (http://www.landofcoder.com/)
+ * @license    http://www.landofcoder.com/LICENSE-1.0.html
+ */
+//@codingStandardsIgnoreFile
+?>
+<?php
+    $barcode_collection = $block->getBarcodes();
+    $product = $block->getProduct();
+    $count = 0;
+    $barcode_list = "";
+    foreach ($barcode_collection as $value) {
+        $barcode_list .= "<option value='".$value->getId()."'>".$value->getBarcode()."</option>";
+    }
+?>
+<div class="entry-edit custom-options barcode_options">
+    <div id="barcode_options_container" class="box">
+        <div id="barcode_options_container_top">
+            <div id="barcode_options_container_top">
+                <table cellpadding="0" class="barcode" style="font-weight: bold">
+                    <tr class="header">
+                        <td class="name_barcode"><?= __("Barcode")?></td>
+                        <td class="qty_barcode"><?= __("Qty")?></td>
+                        <td class="add_new"><button class="lof_multibarcode_add" type="button" title="Add New Option" id="add_new_barcode">Add</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <form data-mage-init='{"validation":{}}' id="multi_bar" method="post" autocomplete="off">
+            <?php
+            if ($product->getId()) {
+                foreach ($barcode_collection as $col) {
+                    if ($col->getProductId() == $product->getId()) {
+                        ?>
+
+                        <div class="option-box-barcode">
+                            <table cellspacing="0" cellpadding="0" class="barcode" ">
+                            <tbody>
+                                    <tr>
+                                        <td class="name_barcode">
+                                            <input placeholder="At least 9 and no more than 12 characters" data-validate='{"required":true, "maxlength":12, "minlength":"9"}' data-form-part='product_form' name="barcodearr[name][<?= $count?>]" id="name_barcode[<?=$count?>]" value="<?php echo $col->getBarcode(); ?>"></input>
+                                        </td>
+                                        <td class="qty_barcode">
+                                            <input data-validate='{"required":true,"number":true, "min":1, "max":9999999}' data-form-part='product_form' name="barcodearr[qty][<?= $count?>] id="qty_barcode[<?=$count?>]" value="<?php echo $col->getQty(); ?>"></input>
+                                        </td>
+                                        <td class="delete_barcode">
+                                            <button class="lof_multibarcode_delete" type="button" data-todelete="<?php echo $count; ?>" title="Delete" id="delete_barcode">Delete</button>
+                                        </td>
+                                    </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                        <?php
+                        $count++;
+                    }
+                }
+            }
+            ?>
+        </form>
+    </div>
+</div>
+<!---->
+<?php
+$formData = [
+    'count' =>$count,
+    'barcode_list' =>$barcode_list
+];
+$serializedFormData = $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode($formData);
+?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "product_views": <?php  echo $serializedFormData; ?>
+        }
+    }
+</script>

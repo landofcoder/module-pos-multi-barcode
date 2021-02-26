@@ -1,0 +1,27 @@
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="product_columns">
+        <column name="multi_barcode" class="Lof\MultiBarcode\Ui\Component\Listing\Columns\Barcode">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/thumbnail</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="altField" xsi:type="string">name</item>
+                    <item name="add_field" xsi:type="boolean">true</item>
+                    <item name="has_preview" xsi:type="string">1</item>
+                    <item name="label" xsi:type="string" translate="true">Multi Barcode</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+            </argument>
+        </column>
+        <actionsColumn class="Lof\MultiBarcode\Ui\Component\Listing\Columns\Preview" name="preview">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">100</item>
+                    <item name="indexField" xsi:type="string">id</item>
+                    <item name="label" xsi:type="string" translate="true">Preview and Print</item>
+                </item>
+            </argument>
+        </actionsColumn>
+    </columns>
+
+</listing>

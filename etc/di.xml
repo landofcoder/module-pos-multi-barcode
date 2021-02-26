@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Lof\MultiBarcode\Api\BarcodeRepositoryInterface" type="Lof\MultiBarcode\Model\BarcodeRepository"/>
+	<preference for="Lof\MultiBarcode\Api\Data\BarcodeInterface" type="Lof\MultiBarcode\Model\Data\Barcode"/>
+	<preference for="Lof\MultiBarcode\Api\Data\BarcodeSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Lof\MultiBarcode\Model\ResourceModel\Barcode\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="lof_multibarcode_listing_data_source" xsi:type="string">Lof\MultiBarcode\Model\ResourceModel\Barcode\Grid\Collection</item>
+			</argument>
+			<argument name="mainTable" xsi:type="string">lof_multibarcode_barcode</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="lof_multibarcode_listing_data_source" xsi:type="string">Lof\MultiBarcode\Model\ResourceModel\Barcode\Grid\Collection</item>
+				<item name="lof_multibarcode_form_data_source" xsi:type="string">Lof\MultiBarcode\Model\ResourceModel\Barcode\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

@@ -1,0 +1,81 @@
+.lof_barcode_add{
+    padding: 5px;
+    margin-bottom: 15px;
+}
+.opt-req{
+    padding: 5px;
+}
+.option-header th{
+    padding: 5px!important;
+    text-align:center!important;
+}
+.border th{
+    padding: 5px!important;
+    text-align:center!important;
+}
+.grid.barcode_one_column {
+    width: 540px;
+    padding: 5px;
+}
+.name_barcode{
+    width: 400px;
+}
+.name_barcode input{
+    width: 380px;
+}
+.qty_barcode{
+    width: 200px;
+}
+.qty_barcode input{
+    width: 180px;
+}
+.warehouse_code {
+    width: 200px;
+}
+.source_code {
+    width: 200px;
+}
+.warehouse_code select{
+    width: 180px;
+}
+.source_code select{
+    width: 180px;
+}
+.add_new{
+    width: 100px;
+}
+.add_new button{
+    width: 80px;
+}
+.delete_barcode{
+    width: 100px;
+}
+.delete_barcode button{
+    width: 80px;
+}
+.barcode tr td{
+    border: 1px solid #cccccc;
+    padding: 5px 10px;
+}
+.barcode tr td input{
+    padding: 5px;
+}
+.barcode .header td{
+    background-color: #333333;
+    color: #fff;
+    border-right: 1px solid #fff;
+}.barcode .header td .add_new{
+    border-right: 1px solid #333333;
+}
+div.mage-error {
+    background: #fffbbb;
+    border: 1px solid #ee7d7d;
+    box-sizing: border-box;
+    color: #555;
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: .2rem 0 0;
+    padding: .8rem 1rem .9rem;
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Lof_MultiBarcode::lof_multibarcode" translate="title" module="Lof_MultiBarcode" resource="Magento_Backend::content" parent="Lof_All::lof_all"  sortOrder="9999" title="Multi Qty Barcode"/>
+        <add action="lof_multibarcode/multibarcode/mirgration" translate="title" id="Lof_MultiBarcode::lof_multibarcode_convert" module="Lof_MultiBarcode" parent="Lof_MultiBarcode::lof_multibarcode" resource="Lof_MultiBarcode::content" sortOrder="10" title="Mirgration"/>
+        <add id="Lof_MultiBarcode::export" title="Export Barcode" translate="title" module="Lof_MultiBarcode" sortOrder="20" parent="Lof_MultiBarcode::lof_multibarcode" action="lof_multibarcode/multibarcode/export" resource="Lof_MultiBarcode::export"/>
+        <add id="Lof_MultiBarcode::import" title="Import Barcode" translate="title" module="Lof_MultiBarcode" sortOrder="30" parent="Lof_MultiBarcode::lof_multibarcode" action="lof_multibarcode/multibarcode/import" resource="Lof_MultiBarcode::import"/>
+    </menu>
+</config>

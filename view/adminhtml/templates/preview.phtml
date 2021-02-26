@@ -1,0 +1,49 @@
+<?php
+$generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
+$productId = $block->getProductId();
+//$url = str_replace("/index.php/", "/", $block->getDomain());
+$barcodeCollection = $block->getBarcodeCollectionFactory();
+?>
+<div id="print_barcode" class="preview">
+    <style type="text/css">
+        .preview tr td{
+            border: 1px solid gray;
+        }
+    </style>
+    <table>
+        <tr>
+            <td class="barcode_id" style="padding: 15px 30px;"><b>Barcode id</b></td>
+            <td class="product_id" style="padding: 15px 30px;"><b>Product id</b></td>
+            <td class="qty" style="padding: 15px 30px;"><b>Qty</b></td>
+            <td class="barcode_name" style="padding: 15px 30px;"><b>Code</b></td>
+            <td class="barcode" style="padding: 15px 30px;"><b>Barcode</b></td>
+        </tr>
+        <?php
+        foreach ($barcodeCollection as $barcode) {
+            if ($barcode->getProductId() == $productId) {
+                $bar =  '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($barcode->getBarcode(), $generator::TYPE_CODE_128)) . '">'; ?>
+                <tr>
+                    <td class="barcode_id" style="padding: 15px 30px;"><?=$barcode->getBarcodeId()?></td>
+                    <td class="product_id" style="padding: 15px 30px;"><?=$barcode->getProductId()?></td>
+                    <td class="qty" style="padding: 15px 30px;"><?=$barcode->getQty()?></td>
+                    <td class="barcode_name" style="padding: 15px 30px;"><?=$barcode->getBarcode()?></td>
+                    <td class="barcode" style="padding: 15px 30px;"><?=$bar?></td>
+                </tr>
+                <?php
+            }
+        }
+        ?>
+    </table>
+</div>
+<a href="#" onclick="printInfo(this)"><button>Print</button></a>
+<script type="text/javascript">
+    function printInfo(ele) {
+        var prtContent = document.getElementById("print_barcode");
+        var openWindow = window.open("", "title", "attributes");
+        openWindow.document.write(prtContent.innerHTML);
+        openWindow.document.close();
+        openWindow.focus();
+        openWindow.print();
+    }
+</script>
+

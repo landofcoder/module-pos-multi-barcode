@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table comment="lof_multibarcode_barcode Table" engine="innodb" name="lof_multibarcode_barcode" resource="default">
+		<column comment="Entity Id" identity="true" name="barcode_id" nullable="false" padding="6" unsigned="false" xsi:type="smallint"/>
+		<constraint referenceId="PRIMARY" xsi:type="primary">
+			<column name="barcode_id"/>
+		</constraint>
+		<column name="barcode" nullable="false" xsi:type="text"/>
+		<column name="qty" nullable="false" xsi:type="text"/>
+		<column name="product_id" nullable="false" xsi:type="text"/>
+		<column name="url" nullable="false" xsi:type="text"/>
+		<column name="warehouse_code" nullable="true" xsi:type="text"/>
+		<column name="source" nullable="true" xsi:type="text"/>
+	</table>
+</schema>

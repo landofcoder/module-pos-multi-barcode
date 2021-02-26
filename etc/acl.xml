@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Lof_MultiBarcode::lof_multibarcode" sortOrder="10" title="lof multibarcode">
+                    <resource id="Lof_MultiBarcode::multibarcode_preview" sortOrder="10" title="multibarcode preview"/>
+                    <resource id="Lof_MultiBarcode::multibarcode_convert" sortOrder="10" title="multibarcode convert"/>
+                    <resource id="Lof_MultiBarcode::multibarcode_mirgration" sortOrder="10" title="multibarcode mirgration"/>
+                    <resource id="Lof_MultiBarcode::import" sortOrder="10" title="multibarcode import"/>
+                    <resource id="Lof_MultiBarcode::export" sortOrder="10" title="multibarcode export"/>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>
