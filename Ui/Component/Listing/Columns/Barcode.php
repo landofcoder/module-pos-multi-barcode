@@ -2,20 +2,36 @@
 namespace Lof\MultiBarcode\Ui\Component\Listing\Columns;
 
 use Magento\Catalog\Helper\Image;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Ui\Component\Listing\Columns\Column;
 
+/**
+ * Class Barcode
+ * @package Lof\MultiBarcode\Ui\Component\Listing\Columns
+ */
 class Barcode extends Column
 {
+    /**
+     *
+     */
     const ALT_FIELD = 'multi_barcode';
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
+     * @var StoreManagerInterface
      */
     protected $storeManager;
+    /**
+     * @var Image
+     */
+    private $imageHelper;
+    /**
+     * @var UrlInterface
+     */
+    private $urlBuilder;
 
     /**
      * @param ContextInterface $context
@@ -46,17 +62,16 @@ class Barcode extends Column
      *
      * @param array $dataSource
      * @return array
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {
             $fieldName = $this->getData('name');
             foreach ($dataSource['data']['items'] as & $item) {
-                $url = '';
                 if (isset($item[$fieldName])) {
                     $url = $this->storeManager->getStore()->getBaseUrl(
-                        \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+                        UrlInterface::URL_TYPE_MEDIA
                     ).'barcode/'.$item[$fieldName];
                     $item[$fieldName . '_src'] = $url;
                     $item[$fieldName . '_alt'] = $this->getAlt($item) ?: '';
