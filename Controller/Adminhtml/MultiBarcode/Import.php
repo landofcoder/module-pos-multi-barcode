@@ -2,35 +2,69 @@
 
 namespace Lof\MultiBarcode\Controller\Adminhtml\MultiBarcode;
 
+use Exception;
 use Lof\MultiBarcode\Model\BarcodeFactory;
 use Lof\MultiBarcode\Helper\Data;
-use Magento\Store\Model\StoreManagerInterface;
-use Magento\Catalog\Model\ProductFactory;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\Result\Redirect;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\File\Csv;
+use Magento\Framework\View\Result\Page;
+use Magento\Framework\View\Result\PageFactory;
 
+/**
+ * Class Import
+ * @package Lof\MultiBarcode\Controller\Adminhtml\MultiBarcode
+ */
 class Import extends \Magento\Backend\App\Action
 {
+    /**
+     * @var PageFactory
+     */
     protected $resultPageFactory;
+    /**
+     * @var Csv
+     */
     protected $csv;
     /**
      * @var BarcodeFactory
      */
     private $barcode;
+    /**
+     * @var Data
+     */
+    private $helper;
 
+    /**
+     * Import constructor.
+     * @param Context $context
+     * @param PageFactory $resultPageFactory
+     * @param Csv $csv
+     * @param BarcodeFactory $barcode
+     * @param Data $helperData
+     */
     public function __construct(
-        \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
-        \Magento\Framework\File\Csv $csv,
+        Context $context,
+        PageFactory $resultPageFactory,
+        Csv $csv,
         BarcodeFactory $barcode,
-        \Lof\MultiBarcode\Helper\Data $helperdata
-    ) {
+        Data $helperData
+    )
+    {
         $this->resultPageFactory = $resultPageFactory;
         $this->csv = $csv;
         $this->barcode = $barcode;
-        $this->helper = $helperdata;
-
+        $this->helper = $helperData;
         parent::__construct($context);
     }
 
+
+    /**
+     * @return ResponseInterface|Redirect|ResultInterface|Page
+     * @throws LocalizedException
+     */
     public function execute()
     {
         $datas = $this->getRequest()->getPostValue();
@@ -44,7 +78,7 @@ class Import extends \Magento\Backend\App\Action
         }
         $resultRedirect = $this->resultRedirectFactory->create();
         if (!isset($_FILES['data_import_file']['tmp_name'])) {
-            throw new \Magento\Framework\Exception\LocalizedException(__('Invalid file upload attempt.'));
+            throw new LocalizedException(__('Invalid file upload attempt.'));
         }
         $csvData = $this->csv->getData($_FILES['data_import_file']['tmp_name']);
         $fields = [];
@@ -74,6 +108,12 @@ class Import extends \Magento\Backend\App\Action
         return $resultRedirect->setPath('*/*/import');
     }
 
+
+    /**
+     * @param $datas
+     * @return string
+     * @throws Exception
+     */
     public function importDataBarcode($datas)
     {
         if (isset($datas['barcode']) && isset($datas['product_id']) && isset($datas['qty']) && isset($datas['warehouse_code']) && isset($datas['source'])) {

@@ -6,14 +6,33 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
+/**
+ * Class Preview
+ * @package Lof\MultiBarcode\Ui\Component\Listing\Columns
+ */
 class Preview extends Column
 {
+    /**
+     *
+     */
     const URL_PREVIEW = 'lof_multibarcode/multibarcode/preview';
 
 
+    /**
+     * @var string
+     */
     private $editUrl;
+    /**
+     * @var
+     */
     protected $actionUrlBuilder;
+    /**
+     * @var UrlInterface
+     */
     protected $urlBuilder;
+    /**
+     * @var
+     */
     protected $_storeManager;
 
     /**
@@ -36,11 +55,15 @@ class Preview extends Column
         $this->urlBuilder = $urlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
+
+    /**
+     * @param array $dataSource
+     * @return array
+     */
     public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
-//                var_dump($item);die;
                 $name = $this->getData('name');
                 if (isset($item['entity_id'])) {
                     $item[$name]['edit'] = [

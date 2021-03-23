@@ -45,7 +45,7 @@ class InstallData implements InstallDataInterface
             'label' => 'Multi Barcode',
             'backend' => 'Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend',
             'frontend' => '',
-            'visible' => 1,
+            'visible' => 0,
             'required' => 0,
             'is_user_defined' => 1,
             'used_for_price_rules' => 1,
