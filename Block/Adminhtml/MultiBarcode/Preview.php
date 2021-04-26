@@ -131,8 +131,10 @@ class Preview extends \Magento\Framework\View\Element\Template
                 $name = $this->getData('name');
                 if (isset($item['product_id'])) {
                     $item[$name]['edit'] = [
-                        'href' => $this->urlBuilder->getUrl('lof_multibarcode/multibarcode/preview',
-                            ['product_id' => $item['product_id']]),
+                        'href' => $this->urlBuilder->getUrl(
+                            'lof_multibarcode/multibarcode/preview',
+                            ['product_id' => $item['product_id']]
+                        ),
                         'target' => '_blank',
                         'label' => __('Preview')
                     ];

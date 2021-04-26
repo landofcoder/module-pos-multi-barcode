@@ -146,8 +146,10 @@ class Import extends \Magento\Backend\App\Action
             return "0";
         }
         $barcode = $this->barcode->create();
-        $existedBarcode = $barcode->getCollection()->addFieldToFilter("barcode",
-            $dataBarcode['barcode'])->getFirstItem();
+        $existedBarcode = $barcode->getCollection()->addFieldToFilter(
+            "barcode",
+            $dataBarcode['barcode']
+        )->getFirstItem();
         if ($existedBarcode->getData()) {
             return "1";
         } else {

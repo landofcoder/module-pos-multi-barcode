@@ -177,8 +177,10 @@ class ProductSaveAfter implements ObserverInterface
         if (isset($barcode_array['source_code'][$barcode_key])) {
             $sourcecode = $barcode_array['source_code'][$barcode_key];
         }
-        $existing = $model->getCollection()->addFieldToFilter("barcode", $name)->addFieldToFilter("product_id",
-            $pro_id)->getData();
+        $existing = $model->getCollection()->addFieldToFilter("barcode", $name)->addFieldToFilter(
+            "product_id",
+            $pro_id
+        )->getData();
         if (count($existing) == 0) {
             $model->setBarcode($name);
             $model->setQty($qty);

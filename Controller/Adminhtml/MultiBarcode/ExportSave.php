@@ -123,8 +123,11 @@ class ExportSave extends \Magento\Framework\App\Action\Action
         $content['type'] = 'filename'; // must keep filename
         $content['value'] = $filePath;
         $content['rm'] = '1'; //remove csv from var folder
-        return $this->fileFactory->create($fileName, $content,
-            \Magento\Framework\App\Filesystem\DirectoryList::VAR_DIR);
+        return $this->fileFactory->create(
+            $fileName,
+            $content,
+            \Magento\Framework\App\Filesystem\DirectoryList::VAR_DIR
+        );
     }
 
     /**

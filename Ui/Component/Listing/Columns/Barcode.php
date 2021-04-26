@@ -86,8 +86,8 @@ class Barcode extends Column
             foreach ($dataSource['data']['items'] as & $item) {
                 if (isset($item[$fieldName])) {
                     $url = $this->storeManager->getStore()->getBaseUrl(
-                            UrlInterface::URL_TYPE_MEDIA
-                        ) . 'barcode/' . $item[$fieldName];
+                        UrlInterface::URL_TYPE_MEDIA
+                    ) . 'barcode/' . $item[$fieldName];
                     $item[$fieldName . '_src'] = $url;
                     $item[$fieldName . '_alt'] = $this->getAlt($item) ?: '';
                     $item[$fieldName . '_orig_src'] = $url;

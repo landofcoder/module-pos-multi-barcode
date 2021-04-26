@@ -70,8 +70,10 @@ class Convert extends \Magento\Framework\App\Action\Action
         $productCollection = $this->productCollection->addFieldToSelect("barcode");
         foreach ($productCollection as $product) {
             if ($product->getBarcode()) {
-                $barcodecollection = $this->barcode->create()->getCollection()->addFieldToFilter("barcode",
-                    $product->getBarcode())->getFirstItem();
+                $barcodecollection = $this->barcode->create()->getCollection()->addFieldToFilter(
+                    "barcode",
+                    $product->getBarcode()
+                )->getFirstItem();
                 if (!$barcodecollection->getData()) {
                     $productId = $product->getId();
                     $barcode = $this->barcode->create();
