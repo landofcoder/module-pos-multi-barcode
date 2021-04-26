@@ -6,7 +6,7 @@
  *
  * This source file is subject to the Landofcoder.com license that is
  * available through the world-wide-web at this URL:
- * http://www.landofcoder.com/license-agreement.html
+ * https://landofcoder.com/terms
  *
  * DISCLAIMER
  *
@@ -15,24 +15,24 @@
  *
  * @category   Landofcoder
  * @package    Lof_MultiBarcode
- * @copyright  Copyright (c) 2020 Landofcoder (http://www.landofcoder.com/)
- * @license    http://www.landofcoder.com/LICENSE-1.0.html
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\MultiBarcode\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Framework\Exception\LocalizedException;
 use Lof\MultiBarcode\Helper\Data;
 use Magento\Framework\Module\Manager;
 use Magento\Inventory\Model\ResourceModel\Source\Collection;
 
-/**
- * Lof MultiBarcode ProductSaveAfter Observer.
- */
 class ProductSaveAfter implements ObserverInterface
 {
+    /**
+     * @var Data
+     */
     protected $_helper;
+
     /**
      * @var \Lof\MultiBarcode\Model\BarcodeFactory
      */
@@ -42,7 +42,7 @@ class ProductSaveAfter implements ObserverInterface
      * @var \Magento\Framework\Stdlib\DateTime\DateTime
      */
     protected $date;
-    
+
     /**
      * @var \Magento\Framework\App\RequestInterface
      */
@@ -52,26 +52,31 @@ class ProductSaveAfter implements ObserverInterface
      * @var \Magento\Catalog\Model\ProductFactory
      */
     protected $product;
+
     /**
      * @var \Magento\Framework\Message\ManagerInterface
      */
     private $_messageManager;
+
     /**
      * @var Collection
      */
     private $source;
+
     /**
      * @var Manager
      */
     private $_moduleManager;
 
     /**
+     * ProductSaveAfter constructor.
      * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
      * @param Data $helper
      * @param \Magento\Framework\App\RequestInterface $request
      * @param \Magento\Catalog\Model\ProductFactory $productLoader
      * @param \Magento\Framework\Message\ManagerInterface $messageManager
      * @param \Lof\MultiBarcode\Model\BarcodeFactory $barcode
+     * @param Manager $moduleManager
      * @param Collection $sourceCollection
      */
     public function __construct(
@@ -84,14 +89,14 @@ class ProductSaveAfter implements ObserverInterface
         Manager $moduleManager,
         Collection $sourceCollection
     ) {
-        $this->barcode=$barcode;
+        $this->barcode = $barcode;
         $this->_helper = $helper;
         $this->date = $date;
         $this->_messageManager = $messageManager;
         $this->source = $sourceCollection;
-        $this->request=$request;
+        $this->request = $request;
         $this->_moduleManager = $moduleManager;
-        $this->product=$productLoader;
+        $this->product = $productLoader;
     }
 
     /**
@@ -109,7 +114,7 @@ class ProductSaveAfter implements ObserverInterface
             if (isset($barcode_arr['name'])) {
                 foreach ($barcode_arr['name'] as $barcode_key => $name) {
                     $this->updateBarcode($productId, $barcode_key, $barcode_arr, $name);
-                    $product->addAttributeUpdate('multi_barcode', $productId.$name.".png", 0);
+                    $product->addAttributeUpdate('multi_barcode', $productId . $name . ".png", 0);
                 }
                 $barcode = $this->barcode->create();
                 $products_bar = $barcode->getCollection()->addFieldToFilter("product_id", $productId);
@@ -117,7 +122,7 @@ class ProductSaveAfter implements ObserverInterface
                     if (in_array($item->getBarcode(), $barcode_arr['name'])) {
                     } else {
                         if ($this->_moduleManager->isEnabled('Lof_BarcodeWarehouseIntegration')) {
-                            if (count($source->getData())>1) {
+                            if (count($source->getData()) > 1) {
                                 $item->delete();
                             } else {
                                 if ($item->getSource() == "") {
@@ -134,7 +139,7 @@ class ProductSaveAfter implements ObserverInterface
                 $products_bar = $barcode->getCollection()->addFieldToFilter("product_id", $productId);
                 foreach ($products_bar as $item) {
                     if ($this->_moduleManager->isEnabled('Lof_BarcodeWarehouseIntegration')) {
-                        if (count($source->getData())>1) {
+                        if (count($source->getData()) > 1) {
                             $item->delete();
                         } else {
                             if ($item->getSource() == "") {
@@ -150,6 +155,14 @@ class ProductSaveAfter implements ObserverInterface
             $this->_messageManager->addError($e->getMessage());
         }
     }
+
+    /**
+     * @param $pro_id
+     * @param $barcode_key
+     * @param $barcode_array
+     * @param $name
+     * @throws \Exception
+     */
     public function updateBarcode(
         $pro_id,
         $barcode_key,
@@ -164,7 +177,10 @@ class ProductSaveAfter implements ObserverInterface
         if (isset($barcode_array['source_code'][$barcode_key])) {
             $sourcecode = $barcode_array['source_code'][$barcode_key];
         }
-        $existing = $model->getCollection()->addFieldToFilter("barcode", $name)->addFieldToFilter("product_id", $pro_id)->getData();
+        $existing = $model->getCollection()->addFieldToFilter("barcode", $name)->addFieldToFilter(
+            "product_id",
+            $pro_id
+        )->getData();
         if (count($existing) == 0) {
             $model->setBarcode($name);
             $model->setQty($qty);
@@ -175,7 +191,7 @@ class ProductSaveAfter implements ObserverInterface
             if (isset($sourcecode)) {
                 $model->setSource($sourcecode);
             }
-            $model->setUrl($pro_id.$name.".png");
+            $model->setUrl($pro_id . $name . ".png");
             $model->save();
             $this->_helper->generateBarcode($model, $pro_id);
         } else {
@@ -185,7 +201,7 @@ class ProductSaveAfter implements ObserverInterface
                 $model->delete();
                 $model = $this->barcode->create();
                 $model->setQty($qty);
-                $model->setUrl($pro_id.$name.".png");
+                $model->setUrl($pro_id . $name . ".png");
                 $model->setBarcode($name);
                 $model->setProductId($pro_id);
                 $model->save();

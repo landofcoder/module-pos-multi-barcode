@@ -1,4 +1,24 @@
 <?php
+/**
+ * Landofcoder
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/terms
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Landofcoder
+ * @package    Lof_MultiBarcode
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
+ */
+
 namespace Lof\MultiBarcode\Ui\Component\Listing\Columns;
 
 use Magento\Framework\UrlInterface;
@@ -6,26 +26,20 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
-/**
- * Class Preview
- * @package Lof\MultiBarcode\Ui\Component\Listing\Columns
- */
 class Preview extends Column
 {
-    /**
-     *
-     */
     const URL_PREVIEW = 'lof_multibarcode/multibarcode/preview';
-
 
     /**
      * @var string
      */
     private $editUrl;
+
     /**
      * @var
      */
     protected $actionUrlBuilder;
+
     /**
      * @var UrlInterface
      */
@@ -68,12 +82,13 @@ class Preview extends Column
                 if (isset($item['entity_id'])) {
                     $item[$name]['edit'] = [
                         'href' => $this->urlBuilder->getUrl($this->editUrl, ['product_id' => $item['entity_id']]),
-                        'target'=>'_blank',
+                        'target' => '_blank',
                         'label' => __('Preview')
                     ];
                 }
             }
         }
+
         return $dataSource;
     }
 }

@@ -1,4 +1,24 @@
 <?php
+/**
+ * Landofcoder
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/terms
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Landofcoder
+ * @package    Lof_MultiBarcode
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
+ */
+
 namespace Lof\MultiBarcode\Ui\Component\Listing\Columns;
 
 use Magento\Catalog\Helper\Image;
@@ -9,25 +29,20 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Ui\Component\Listing\Columns\Column;
 
-/**
- * Class Barcode
- * @package Lof\MultiBarcode\Ui\Component\Listing\Columns
- */
 class Barcode extends Column
 {
-    /**
-     *
-     */
     const ALT_FIELD = 'multi_barcode';
 
     /**
      * @var StoreManagerInterface
      */
     protected $storeManager;
+
     /**
      * @var Image
      */
     private $imageHelper;
+
     /**
      * @var UrlInterface
      */
@@ -72,7 +87,7 @@ class Barcode extends Column
                 if (isset($item[$fieldName])) {
                     $url = $this->storeManager->getStore()->getBaseUrl(
                         UrlInterface::URL_TYPE_MEDIA
-                    ).'barcode/'.$item[$fieldName];
+                    ) . 'barcode/' . $item[$fieldName];
                     $item[$fieldName . '_src'] = $url;
                     $item[$fieldName . '_alt'] = $this->getAlt($item) ?: '';
                     $item[$fieldName . '_orig_src'] = $url;

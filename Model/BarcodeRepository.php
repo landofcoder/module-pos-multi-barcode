@@ -1,24 +1,22 @@
 <?php
 /**
- * Copyright (c) 2020  Lanfofcoder
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * Landofcoder
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/terms
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Landofcoder
+ * @package    Lof_MultiBarcode
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\MultiBarcode\Model;
@@ -40,30 +38,63 @@ use Lof\MultiBarcode\Api\Data\BarcodeInterfaceFactory;
 
 class BarcodeRepository implements BarcodeRepositoryInterface
 {
-
+    /**
+     * @var DataObjectHelper
+     */
     protected $dataObjectHelper;
 
+    /**
+     * @var BarcodeFactory
+     */
     protected $barcodeFactory;
 
+    /**
+     * @var StoreManagerInterface
+     */
     private $storeManager;
 
+    /**
+     * @var BarcodeSearchResultsInterfaceFactory
+     */
     protected $searchResultsFactory;
 
+    /**
+     * @var DataObjectProcessor
+     */
     protected $dataObjectProcessor;
 
+    /**
+     * @var JoinProcessorInterface
+     */
     protected $extensionAttributesJoinProcessor;
 
+    /**
+     * @var CollectionProcessorInterface
+     */
     private $collectionProcessor;
 
+    /**
+     * @var BarcodeCollectionFactory
+     */
     protected $barcodeCollectionFactory;
 
+    /**
+     * @var ResourceBarcode
+     */
     protected $resource;
 
+    /**
+     * @var ExtensibleDataObjectConverter
+     */
     protected $extensibleDataObjectConverter;
-    protected $dataBarcodeFactory;
-
 
     /**
+     * @var BarcodeInterfaceFactory
+     */
+    protected $dataBarcodeFactory;
+
+    /**
+     * BarcodeRepository constructor.
      * @param ResourceBarcode $resource
      * @param BarcodeFactory $barcodeFactory
      * @param BarcodeInterfaceFactory $dataBarcodeFactory
@@ -75,6 +106,8 @@ class BarcodeRepository implements BarcodeRepositoryInterface
      * @param CollectionProcessorInterface $collectionProcessor
      * @param JoinProcessorInterface $extensionAttributesJoinProcessor
      * @param ExtensibleDataObjectConverter $extensibleDataObjectConverter
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         ResourceBarcode $resource,
@@ -112,15 +145,15 @@ class BarcodeRepository implements BarcodeRepositoryInterface
             $storeId = $this->storeManager->getStore()->getId();
             $barcode->setStoreId($storeId);
         } */
-        
+
         $barcodeData = $this->extensibleDataObjectConverter->toNestedArray(
             $barcode,
             [],
             \Lof\MultiBarcode\Api\Data\BarcodeInterface::class
         );
-        
+
         $barcodeModel = $this->barcodeFactory->create()->setData($barcodeData);
-        
+
         try {
             $this->resource->save($barcodeModel);
         } catch (\Exception $exception) {
@@ -152,22 +185,22 @@ class BarcodeRepository implements BarcodeRepositoryInterface
         \Magento\Framework\Api\SearchCriteriaInterface $criteria
     ) {
         $collection = $this->barcodeCollectionFactory->create();
-        
+
         $this->extensionAttributesJoinProcessor->process(
             $collection,
             \Lof\MultiBarcode\Api\Data\BarcodeInterface::class
         );
-        
+
         $this->collectionProcessor->process($criteria, $collection);
-        
+
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);
-        
+
         $items = [];
         foreach ($collection as $model) {
             $items[] = $model->getDataModel();
         }
-        
+
         $searchResults->setItems($items);
         $searchResults->setTotalCount($collection->getSize());
         return $searchResults;
