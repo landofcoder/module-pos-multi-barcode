@@ -16,6 +16,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
     protected $_coreRegistry = null;
 
     /**
+     * Edit constructor.
      * @param Context $context
      * @param Registry $registry
      * @param array $data
@@ -29,6 +30,9 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
         parent::__construct($context, $data);
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function _construct()
     {
         parent::_construct();
@@ -57,7 +61,6 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
     {
         return $this->_authorization->isAllowed($resourceId);
     }
-
 
     /**
      * Prepare layout

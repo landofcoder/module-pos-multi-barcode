@@ -1,17 +1,17 @@
 <?php
 /**
  * Copyright (c) 2020  Lanfofcoder
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,12 +22,12 @@
  */
 
 namespace Lof\MultiBarcode\Model\ResourceModel;
+
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Exception\LocalizedException;
 
 class Barcode extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
-
     /**
      * Define resource model
      *
@@ -37,11 +37,23 @@ class Barcode extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     {
         $this->_init('lof_multibarcode_barcode', 'barcode_id');
     }
+
+    /**
+     * @param AbstractModel $object
+     * @return Barcode
+     * @throws LocalizedException
+     */
     protected function _beforeSave(AbstractModel $object)
     {
         $result = $this->checkNameExits($object);
         return parent::_beforeSave($object);
     }
+
+    /**
+     * @param AbstractModel $object
+     * @return $this
+     * @throws LocalizedException
+     */
     public function checkNameExits(AbstractModel $object)
     {
         $connection = $this->getConnection();
@@ -54,7 +66,7 @@ class Barcode extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 $object->getBarcode()
             );
         $barcodeIds = $connection->fetchCol($select);
-        if (count($barcodeIds)>0) {
+        if (count($barcodeIds) > 0) {
             throw new LocalizedException(
                 __('Barcode name already exists.')
             );

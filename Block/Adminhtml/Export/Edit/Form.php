@@ -34,9 +34,10 @@ use Magento\Store\Model\System\Store;
 class Form extends \Magento\Backend\Block\Widget\Form\Generic
 {
     /**
-     * Customer Group Collection
+     * @var
      */
     protected $_groupCollection;
+
     /**
      * @var Yesno
      */
@@ -51,17 +52,18 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
      * @var Warehouse
      */
     private $warehouse;
+
     /**
      * @var Source
      */
     private $source;
 
     /**
+     * Form constructor.
      * @param Context $context
      * @param Registry $registry
      * @param FormFactory $formFactory
      * @param Yesno $yesno
-     * @param Store $systemStore
      * @param FileExtension $fileExtension
      * @param Warehouse $warehouse
      * @param Source $source
@@ -102,42 +104,42 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
 
         /**
          * @var \Magento\Framework\Data\Form $form
-        */
+         */
 
         $form = $this->_formFactory->create(
             [
-                    'data' => [
+                'data' => [
                     'id' => 'edit_form',
                     'action' => $this->getUrl('*/*/exportsave'),
                     'method' => 'post',
                     'enctype' => 'multipart/form-data'
-                    ]
                 ]
+            ]
         );
         $fieldset = $form->addFieldset('base_fieldset', ['legend' => __('Lof Setup Export Barcode')]);
         $fieldset->addField(
             'file_name',
             'text',
             [
-                    'name' => 'file_name',
-                    'label' => __('File Name'),
-                    'title' => __('File Name'),
-                    'required' => true,
-                    'disabled' => $isElementDisabled,
-                    'note' => __('This will be the name of the file in which configuration will be saved. You can enter any name you want.')
-                ]
+                'name' => 'file_name',
+                'label' => __('File Name'),
+                'title' => __('File Name'),
+                'required' => true,
+                'disabled' => $isElementDisabled,
+                'note' => __('This will be the name of the file in which configuration will be saved. You can enter any name you want.')
+            ]
         );
 
         $fieldset->addField(
             'file_extension',
             'select',
             [
-                    'name' => 'file_extension',
-                    'label' => __('File Extension'),
-                    'title' => __('File Extension'),
-                    'values' => $this->_fileExtension->toOptionArray(),
-                    'disabled' => $isElementDisabled
-                ]
+                'name' => 'file_extension',
+                'label' => __('File Extension'),
+                'title' => __('File Extension'),
+                'values' => $this->_fileExtension->toOptionArray(),
+                'disabled' => $isElementDisabled
+            ]
         );
 
         $filter_fieldset = $form->addFieldset('filter_fieldset', ['legend' => __('Filter Barcode')]);
@@ -145,22 +147,24 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'barcode_id',
             'text',
             [
-                    'name' => 'barcode_id',
-                    'label' => __('Barcode Id'),
-                    'title' => __('Barcode Id'),
-                    'disabled' => $isElementDisabled
-                ]
+                'name' => 'barcode_id',
+                'label' => __('Barcode Id'),
+                'title' => __('Barcode Id'),
+                'disabled' => $isElementDisabled
+            ]
         );
+
         $filter_fieldset->addField(
             'barcode',
             'text',
             [
-                    'name' => 'barcode',
-                    'label' => __('Barcode'),
-                    'title' => __('Barcode'),
-                    'disabled' => $isElementDisabled
-                ]
+                'name' => 'barcode',
+                'label' => __('Barcode'),
+                'title' => __('Barcode'),
+                'disabled' => $isElementDisabled
+            ]
         );
+
         $filter_fieldset->addField(
             'qty',
             'text',
@@ -171,28 +175,29 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'disabled' => $isElementDisabled
             ]
         );
+
         $filter_fieldset->addField(
             'product_id',
             'text',
             [
-                    'name' => 'product_id',
-                    'label' => __('Product ID'),
-                    'title' => __('Product ID'),
-                    'required' => false,
-                    'disabled' => $isElementDisabled
-                ]
+                'name' => 'product_id',
+                'label' => __('Product ID'),
+                'title' => __('Product ID'),
+                'required' => false,
+                'disabled' => $isElementDisabled
+            ]
         );
 
         $filter_fieldset->addField(
             'warehouse_code',
             'select',
             [
-                    'name' => 'warehouse_code',
-                    'label' => __('Warehouse'),
-                    'title' => __('Warehouse'),
-                    'values' => $this->warehouse->toOptionArray(),
-                    'disabled' => $isElementDisabled
-                ]
+                'name' => 'warehouse_code',
+                'label' => __('Warehouse'),
+                'title' => __('Warehouse'),
+                'values' => $this->warehouse->toOptionArray(),
+                'disabled' => $isElementDisabled
+            ]
         );
 
         $filter_fieldset->addField(
@@ -204,7 +209,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 'title' => __('Source'),
                 'values' => $this->source->toOptionArray(),
                 'disabled' => $isElementDisabled
-                ]
+            ]
         );
 
         $form->setUseContainer(true);
@@ -212,9 +217,12 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         return parent::_prepareForm();
     }
 
+    /**
+     * @param $resourceId
+     * @return bool
+     */
     protected function _isAllowedAction($resourceId)
     {
         return $this->_authorization->isAllowed($resourceId);
     }
-
 }

@@ -6,12 +6,43 @@ use Lof\MultiBarcode\Model\Barcode;
 
 class ExportSave extends \Magento\Framework\App\Action\Action
 {
+    /**
+     * @var \Magento\Framework\App\Response\Http\FileFactory
+     */
     protected $fileFactory;
+
+    /**
+     * @var \Magento\Framework\File\Csv
+     */
     protected $csvProcessor;
+
+    /**
+     * @var \Magento\Framework\App\Filesystem\DirectoryList
+     */
     protected $directoryList;
+
+    /**
+     * @var \Magento\Framework\View\Result\PageFactory
+     */
     protected $resultPageFactory;
+
+    /**
+     * @var \Magento\Framework\App\ResourceConnection
+     */
     protected $_resource;
 
+    /**
+     * ExportSave constructor.
+     * @param \Magento\Framework\App\Action\Context $context
+     * @param \Magento\Framework\App\Response\Http\FileFactory $fileFactory
+     * @param \Magento\Framework\File\Csv $csvProcessor
+     * @param \Magento\Framework\Filesystem $filesystem
+     * @param \Magento\Framework\App\Filesystem\DirectoryList $directoryList
+     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     * @param \Magento\Framework\App\ResourceConnection $Resource
+     * @param Barcode $barcode
+     * @throws \Magento\Framework\Exception\FileSystemException
+     */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\App\Response\Http\FileFactory $fileFactory,
@@ -33,11 +64,15 @@ class ExportSave extends \Magento\Framework\App\Action\Action
         parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     * @throws \Magento\Framework\Exception\FileSystemException
+     */
     public function execute()
     {
         $data = $this->getRequest()->getParams();
-        $data['file_extension'] = isset($data['file_extension'])?$data['file_extension']:".csv";
-        $fileName = $data['file_name'].$data['file_extension'];
+        $data['file_extension'] = isset($data['file_extension']) ? $data['file_extension'] : ".csv";
+        $fileName = $data['file_name'] . $data['file_extension'];
         $fileName = str_replace(" ", "-", $fileName);
         $filePath = $this->directoryList->getPath(\Magento\Framework\App\Filesystem\DirectoryList::VAR_DIR)
             . "/" . $fileName;
@@ -47,7 +82,7 @@ class ExportSave extends \Magento\Framework\App\Action\Action
         $stream->lock();
 
 
-        $columns = ['barcode_id','barcode','qty','product_id','warehouse_code','source',];
+        $columns = ['barcode_id', 'barcode', 'qty', 'product_id', 'warehouse_code', 'source',];
         foreach ($columns as $column) {
             $header[] = $column;
         }
@@ -69,9 +104,13 @@ class ExportSave extends \Magento\Framework\App\Action\Action
         $content['type'] = 'filename'; // must keep filename
         $content['value'] = $filePath;
         $content['rm'] = '1'; //remove csv from var folder
-        return $this->fileFactory->create($fileName, $content, \Magento\Framework\App\Filesystem\DirectoryList::VAR_DIR);
+        return $this->fileFactory->create($fileName, $content,
+            \Magento\Framework\App\Filesystem\DirectoryList::VAR_DIR);
     }
 
+    /**
+     * @return \Magento\Framework\Data\Collection\AbstractDb|\Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection|null
+     */
     protected function getBarcodeData()
     {
         $result = [];
@@ -84,12 +123,12 @@ class ExportSave extends \Magento\Framework\App\Action\Action
             'source',
         ];
         $data = $this->getRequest()->getParams();
-        $filter_barcode_id = isset($data['barcode_id'])?$data['barcode_id']:"";
-        $filter_barcode = isset($data['barcode'])?$data['barcode']:"";
-        $filter_qty = isset($data['qty'])?$data['qty']:"";
-        $filter_product_id = isset($data['product_id'])?(int)$data['product_id']:'';
-        $filter_warehouse_code = isset($data['warehouse_code'])?$data['warehouse_code']:'';
-        $filter_source = isset($data['source'])?$data['source']:'';
+        $filter_barcode_id = isset($data['barcode_id']) ? $data['barcode_id'] : "";
+        $filter_barcode = isset($data['barcode']) ? $data['barcode'] : "";
+        $filter_qty = isset($data['qty']) ? $data['qty'] : "";
+        $filter_product_id = isset($data['product_id']) ? (int)$data['product_id'] : '';
+        $filter_warehouse_code = isset($data['warehouse_code']) ? $data['warehouse_code'] : '';
+        $filter_source = isset($data['source']) ? $data['source'] : '';
         $barcode = $this->barcode;
         $collectionBarcode = $barcode->getCollection();
         if ($filter_barcode_id) {
@@ -112,6 +151,10 @@ class ExportSave extends \Magento\Framework\App\Action\Action
         }
         return $collectionBarcode;
     }
+
+    /**
+     * @return mixed
+     */
     protected function _isAllowed()
     {
         return $this->_authorization->isAllowed('Lof_MultiBarcode::exportSave');

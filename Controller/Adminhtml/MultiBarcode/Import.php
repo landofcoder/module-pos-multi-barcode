@@ -14,24 +14,23 @@ use Magento\Framework\File\Csv;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
-/**
- * Class Import
- * @package Lof\MultiBarcode\Controller\Adminhtml\MultiBarcode
- */
 class Import extends \Magento\Backend\App\Action
 {
     /**
      * @var PageFactory
      */
     protected $resultPageFactory;
+
     /**
      * @var Csv
      */
     protected $csv;
+
     /**
      * @var BarcodeFactory
      */
     private $barcode;
+
     /**
      * @var Data
      */
@@ -51,15 +50,13 @@ class Import extends \Magento\Backend\App\Action
         Csv $csv,
         BarcodeFactory $barcode,
         Data $helperData
-    )
-    {
+    ) {
         $this->resultPageFactory = $resultPageFactory;
         $this->csv = $csv;
         $this->barcode = $barcode;
         $this->helper = $helperData;
         parent::__construct($context);
     }
-
 
     /**
      * @return ResponseInterface|Redirect|ResultInterface|Page
@@ -76,6 +73,7 @@ class Import extends \Magento\Backend\App\Action
             $resultPage->getConfig()->getTitle()->prepend(__('Import Barcodes'));
             return $resultPage;
         }
+
         $resultRedirect = $this->resultRedirectFactory->create();
         if (!isset($_FILES['data_import_file']['tmp_name'])) {
             throw new LocalizedException(__('Invalid file upload attempt.'));
@@ -92,6 +90,7 @@ class Import extends \Magento\Backend\App\Action
                 foreach ($data_field as $key => $item) {
                     $datas[$fields[$key]] = isset($data_field[$key]) ? str_replace('"', '', $data_field[$key]) : "";
                 }
+
                 $result = $this->importDataBarcode($datas);
                 if ($result == "1") {
                     $this->messageManager->addErrorMessage(__('Import Error. Barcode have already existed'));
@@ -128,13 +127,14 @@ class Import extends \Magento\Backend\App\Action
             return "0";
         }
         $barcode = $this->barcode->create();
-        $existedBarcode = $barcode->getCollection()->addFieldToFilter("barcode", $dataBarcode['barcode'])->getFirstItem();
+        $existedBarcode = $barcode->getCollection()->addFieldToFilter("barcode",
+            $dataBarcode['barcode'])->getFirstItem();
         if ($existedBarcode->getData()) {
             return "1";
         } else {
             $barcode = $this->barcode->create();
             $barcode->setData($dataBarcode);
-            $barcode->setUrl($barcode->getProductId().$barcode->getBarcode().".png");
+            $barcode->setUrl($barcode->getProductId() . $barcode->getBarcode() . ".png");
             $barcode->save();
             $this->helper->generateBarcode($barcode, $barcode->getProductId());
 

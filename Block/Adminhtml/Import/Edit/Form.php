@@ -22,12 +22,12 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
     protected $_yesNo;
 
     /**
+     * Form constructor.
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Data\FormFactory $formFactory
      * @param \Magento\Store\Model\System\Store $systemStore
-     * @param \Lof\Setup\Model\System\Config\Source\Import\Files $importFiles
-     * @param Yesno $yesNo
+     * @param Yesno $yesno
      * @param array $data
      */
     public function __construct(

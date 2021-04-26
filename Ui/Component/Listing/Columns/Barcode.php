@@ -1,4 +1,5 @@
 <?php
+
 namespace Lof\MultiBarcode\Ui\Component\Listing\Columns;
 
 use Magento\Catalog\Helper\Image;
@@ -9,25 +10,20 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Ui\Component\Listing\Columns\Column;
 
-/**
- * Class Barcode
- * @package Lof\MultiBarcode\Ui\Component\Listing\Columns
- */
 class Barcode extends Column
 {
-    /**
-     *
-     */
     const ALT_FIELD = 'multi_barcode';
 
     /**
      * @var StoreManagerInterface
      */
     protected $storeManager;
+
     /**
      * @var Image
      */
     private $imageHelper;
+
     /**
      * @var UrlInterface
      */
@@ -71,8 +67,8 @@ class Barcode extends Column
             foreach ($dataSource['data']['items'] as & $item) {
                 if (isset($item[$fieldName])) {
                     $url = $this->storeManager->getStore()->getBaseUrl(
-                        UrlInterface::URL_TYPE_MEDIA
-                    ).'barcode/'.$item[$fieldName];
+                            UrlInterface::URL_TYPE_MEDIA
+                        ) . 'barcode/' . $item[$fieldName];
                     $item[$fieldName . '_src'] = $url;
                     $item[$fieldName . '_alt'] = $this->getAlt($item) ?: '';
                     $item[$fieldName . '_orig_src'] = $url;

@@ -14,7 +14,8 @@ class Source implements \Magento\Framework\Option\ArrayInterface
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $moduleManager = $objectManager->create('Magento\Framework\Module\Manager');
         if ($moduleManager->isEnabled("Lof_Inventory")) {
-            $sourceCollection = $objectManager->create('Magento\Inventory\Model\ResourceModel\Source\Collection')->addFieldToFilter("enabled", '1');
+            $sourceCollection = $objectManager->create('Magento\Inventory\Model\ResourceModel\Source\Collection')->addFieldToFilter("enabled",
+                '1');
             $options[] = [
                 'label' => "",
                 'value' => "",

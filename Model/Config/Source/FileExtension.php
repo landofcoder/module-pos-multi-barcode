@@ -28,5 +28,4 @@ class FileExtension implements \Magento\Framework\Option\ArrayInterface
     {
         return ['value' => '.csv', 'label' => __('.csv')];
     }
-
 }

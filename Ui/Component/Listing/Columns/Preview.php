@@ -1,4 +1,5 @@
 <?php
+
 namespace Lof\MultiBarcode\Ui\Component\Listing\Columns;
 
 use Magento\Framework\UrlInterface;
@@ -6,26 +7,20 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
-/**
- * Class Preview
- * @package Lof\MultiBarcode\Ui\Component\Listing\Columns
- */
 class Preview extends Column
 {
-    /**
-     *
-     */
     const URL_PREVIEW = 'lof_multibarcode/multibarcode/preview';
-
 
     /**
      * @var string
      */
     private $editUrl;
+
     /**
      * @var
      */
     protected $actionUrlBuilder;
+
     /**
      * @var UrlInterface
      */
@@ -68,12 +63,13 @@ class Preview extends Column
                 if (isset($item['entity_id'])) {
                     $item[$name]['edit'] = [
                         'href' => $this->urlBuilder->getUrl($this->editUrl, ['product_id' => $item['entity_id']]),
-                        'target'=>'_blank',
+                        'target' => '_blank',
                         'label' => __('Preview')
                     ];
                 }
             }
         }
+
         return $dataSource;
     }
 }
