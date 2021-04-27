@@ -105,7 +105,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         /**
          * @var \Magento\Framework\Data\Form $form
          */
-
         $form = $this->_formFactory->create(
             [
                 'data' => [
@@ -116,7 +115,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
                 ]
             ]
         );
-        $fieldset = $form->addFieldset('base_fieldset', ['legend' => __('Lof Setup Export Barcode')]);
+        $fieldset = $form->addFieldset('base_fieldset', ['legend' => __('Export Barcode')]);
         $fieldset->addField(
             'file_name',
             'text',
@@ -188,29 +187,29 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             ]
         );
 
-        $filter_fieldset->addField(
-            'warehouse_code',
-            'select',
-            [
-                'name' => 'warehouse_code',
-                'label' => __('Warehouse'),
-                'title' => __('Warehouse'),
-                'values' => $this->warehouse->toOptionArray(),
-                'disabled' => $isElementDisabled
-            ]
-        );
+//        $filter_fieldset->addField(
+//            'warehouse_code',
+//            'select',
+//            [
+//                'name' => 'warehouse_code',
+//                'label' => __('Warehouse'),
+//                'title' => __('Warehouse'),
+//                'values' => $this->warehouse->toOptionArray(),
+//                'disabled' => $isElementDisabled
+//            ]
+//        );
 
-        $filter_fieldset->addField(
-            'source',
-            'select',
-            [
-                'name' => 'source',
-                'label' => __('Source'),
-                'title' => __('Source'),
-                'values' => $this->source->toOptionArray(),
-                'disabled' => $isElementDisabled
-            ]
-        );
+//        $filter_fieldset->addField(
+//            'source',
+//            'select',
+//            [
+//                'name' => 'source',
+//                'label' => __('Source'),
+//                'title' => __('Source'),
+//                'values' => $this->source->toOptionArray(),
+//                'disabled' => $isElementDisabled
+//            ]
+//        );
 
         $form->setUseContainer(true);
         $this->setForm($form);

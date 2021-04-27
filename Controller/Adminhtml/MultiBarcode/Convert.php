@@ -21,8 +21,13 @@
 
 namespace Lof\MultiBarcode\Controller\Adminhtml\MultiBarcode;
 
-class Convert extends \Magento\Framework\App\Action\Action
+class Convert extends \Magento\Backend\App\Action
 {
+    /**
+     * Authorization level of a basic admin session
+     */
+    const ADMIN_RESOURCE = 'Lof_MultiBarcode::convert';
+
     /**
      * @var \Magento\Framework\View\Result\PageFactory
      */

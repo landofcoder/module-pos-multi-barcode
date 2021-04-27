@@ -21,8 +21,13 @@
 
 namespace Lof\MultiBarcode\Controller\Adminhtml\MultiBarcode;
 
-class Export extends \Magento\Framework\App\Action\Action
+class Export extends \Magento\Backend\App\Action
 {
+    /**
+     * Authorization level of a basic admin session
+     */
+    const ADMIN_RESOURCE = 'Lof_MultiBarcode::export';
+
     /**
      * @var \Magento\Framework\View\Result\PageFactory
      */

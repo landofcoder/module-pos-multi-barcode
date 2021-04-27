@@ -91,6 +91,10 @@ class Barcode extends Column
                     $item[$fieldName . '_src'] = $url;
                     $item[$fieldName . '_alt'] = $this->getAlt($item) ?: '';
                     $item[$fieldName . '_orig_src'] = $url;
+                    $item[$fieldName . '_link'] = $this->urlBuilder->getUrl(
+                        'catalog/product/edit',
+                        ['id' => $item['product_id'], 'store' => $this->context->getRequestParam('store')]
+                    );
                 }
             }
         }

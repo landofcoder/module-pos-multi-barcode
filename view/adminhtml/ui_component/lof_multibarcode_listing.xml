@@ -95,7 +95,7 @@
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">text</item>
                     </item>
-                    <item name="label" xsi:type="string" translate="true">Qty to add</item>
+                    <item name="label" xsi:type="string" translate="true">Product QTY</item>
                 </item>
             </argument>
         </column>
@@ -106,7 +106,7 @@
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">text</item>
                     </item>
-                    <item name="label" xsi:type="string" translate="true">Product Id</item>
+                    <item name="label" xsi:type="string" translate="true">Product ID</item>
                 </item>
             </argument>
         </column>
@@ -117,32 +117,32 @@
                     <item name="sortable" xsi:type="boolean">false</item>
                     <item name="altField" xsi:type="string">name</item>
                     <item name="has_preview" xsi:type="string">1</item>
-                    <item name="label" xsi:type="string" translate="true">Barcode Image</item>
+                    <item name="label" xsi:type="string" translate="true">Image</item>
                     <item name="sortOrder" xsi:type="number">40</item>
                 </item>
             </argument>
         </column>
-        <column name="warehouse_code">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">text</item>
-                    </item>
-                    <item name="label" xsi:type="string" translate="true">Warehouse Code</item>
-                </item>
-            </argument>
-        </column>
-        <column name="source">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">text</item>
-                    </item>
-                    <item name="label" xsi:type="string" translate="true">Source Code</item>
-                </item>
-            </argument>
-        </column>
+<!--        <column name="warehouse_code">-->
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="filter" xsi:type="string">text</item>-->
+<!--                    <item name="editor" xsi:type="array">-->
+<!--                        <item name="editorType" xsi:type="string">text</item>-->
+<!--                    </item>-->
+<!--                    <item name="label" xsi:type="string" translate="true">Warehouse Code</item>-->
+<!--                </item>-->
+<!--            </argument>-->
+<!--        </column>-->
+<!--        <column name="source">-->
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="filter" xsi:type="string">text</item>-->
+<!--                    <item name="editor" xsi:type="array">-->
+<!--                        <item name="editorType" xsi:type="string">text</item>-->
+<!--                    </item>-->
+<!--                    <item name="label" xsi:type="string" translate="true">Source Code</item>-->
+<!--                </item>-->
+<!--            </argument>-->
+<!--        </column>-->
     </columns>
 </listing>

@@ -36,6 +36,11 @@ use Magento\Framework\View\Result\PageFactory;
 class Import extends \Magento\Backend\App\Action
 {
     /**
+     * Authorization level of a basic admin session
+     */
+    const ADMIN_RESOURCE = 'Lof_MultiBarcode::import';
+
+    /**
      * @var PageFactory
      */
     protected $resultPageFactory;
