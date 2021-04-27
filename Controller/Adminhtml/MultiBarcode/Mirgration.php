@@ -21,8 +21,13 @@
 
 namespace Lof\MultiBarcode\Controller\Adminhtml\MultiBarcode;
 
-class Mirgration extends \Magento\Framework\App\Action\Action
+class Mirgration extends \Magento\Backend\App\Action
 {
+    /**
+     * Authorization level of a basic admin session
+     */
+    const ADMIN_RESOURCE = 'Lof_MultiBarcode::mirgration';
+
     /**
      * @var \Magento\Framework\View\Result\PageFactory
      */

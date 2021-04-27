@@ -23,12 +23,12 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Lof_MultiBarcode::lof_multibarcode" sortOrder="10" title="lof multibarcode">
-                    <resource id="Lof_MultiBarcode::multibarcode_preview" sortOrder="10" title="multibarcode preview"/>
-                    <resource id="Lof_MultiBarcode::multibarcode_convert" sortOrder="10" title="multibarcode convert"/>
-                    <resource id="Lof_MultiBarcode::multibarcode_mirgration" sortOrder="10" title="multibarcode mirgration"/>
-                    <resource id="Lof_MultiBarcode::import" sortOrder="10" title="multibarcode import"/>
-                    <resource id="Lof_MultiBarcode::export" sortOrder="10" title="multibarcode export"/>
+                <resource id="Lof_MultiBarcode::multibarcode" sortOrder="10" title="Lof Multi Barcode">
+                    <resource id="Lof_MultiBarcode::preview" sortOrder="10" title="Preview"/>
+                    <resource id="Lof_MultiBarcode::convert" sortOrder="10" title="Convert"/>
+                    <resource id="Lof_MultiBarcode::mirgration" sortOrder="10" title="Mirgration"/>
+                    <resource id="Lof_MultiBarcode::import" sortOrder="10" title="Import"/>
+                    <resource id="Lof_MultiBarcode::export" sortOrder="10" title="Export"/>
                 </resource>
             </resource>
         </resources>

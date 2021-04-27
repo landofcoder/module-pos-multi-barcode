@@ -67,7 +67,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
      */
     public function getHeaderText()
     {
-        return __('Lof Import Barcode');
+        return __('Import Barcode');
     }
 
     /**

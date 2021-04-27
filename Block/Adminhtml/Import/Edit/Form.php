@@ -92,7 +92,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             ]
         );
 
-        $fieldset = $form->addFieldset('base_fieldset', ['legend' => __('Lof Setup Import Barcode')]);
+        $fieldset = $form->addFieldset('base_fieldset', ['legend' => __('Import Barcode')]);
 
         $fieldset->addField(
             'data_import_file',

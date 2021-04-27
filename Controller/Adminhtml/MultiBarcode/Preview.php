@@ -21,8 +21,13 @@
 
 namespace Lof\MultiBarcode\Controller\Adminhtml\MultiBarcode;
 
-class Preview extends \Magento\Framework\App\Action\Action
+class Preview extends \Magento\Backend\App\Action
 {
+    /**
+     * Authorization level of a basic admin session
+     */
+    const ADMIN_RESOURCE = 'Lof_MultiBarcode::preview';
+
     /**
      * @var \Magento\Framework\View\Result\PageFactory
      */

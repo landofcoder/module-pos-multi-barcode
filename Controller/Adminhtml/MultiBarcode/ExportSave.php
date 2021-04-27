@@ -23,8 +23,13 @@ namespace Lof\MultiBarcode\Controller\Adminhtml\MultiBarcode;
 
 use Lof\MultiBarcode\Model\Barcode;
 
-class ExportSave extends \Magento\Framework\App\Action\Action
+class ExportSave extends \Magento\Backend\App\Action
 {
+    /**
+     * Authorization level of a basic admin session
+     */
+    const ADMIN_RESOURCE = 'Lof_MultiBarcode::export';
+
     /**
      * @var \Magento\Framework\App\Response\Http\FileFactory
      */
