@@ -178,12 +178,4 @@ class ExportSave extends \Magento\Backend\App\Action
         }
         return $collectionBarcode;
     }
-
-    /**
-     * @return mixed
-     */
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('Lof_MultiBarcode::exportSave');
-    }
 }
