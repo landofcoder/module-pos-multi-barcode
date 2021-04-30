@@ -45,14 +45,14 @@ class Convert extends \Magento\Backend\App\Action
 
     /**
      * Convert constructor.
-     * @param \Magento\Framework\App\Action\Context $context
+     * @param \Magento\Backend\App\Action\Context $context
      * @param \Magento\Framework\View\Result\PageFactory $pageFactory
      * @param \Magento\Catalog\Model\ResourceModel\Product\Collection $productCollection
      * @param \Lof\MultiBarcode\Model\BarcodeFactory $barcode
      * @param \Lof\MultiBarcode\Helper\Data $helper
      */
     public function __construct(
-        \Magento\Framework\App\Action\Context $context,
+        \Magento\Backend\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $pageFactory,
         \Magento\Catalog\Model\ResourceModel\Product\Collection $productCollection,
         \Lof\MultiBarcode\Model\BarcodeFactory $barcode,
