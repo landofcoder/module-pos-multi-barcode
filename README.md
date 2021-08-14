@@ -1,4 +1,4 @@
-# Mage2 Module Lof MultiBarcode
+# Magento 2 Module Lof MultiBarcode
 
     ``landofcoder/module-pos-multi-barcode``
 
@@ -6,7 +6,8 @@
  - [Installation](#markdown-header-installation)
 
 ## Main Functionalities
-
+- Support generate barcode for multi source products
+- Compatible with MSI of magento 2.3.6-2.4.x
 
 ## Installation
 \* = in production please use the `--keep-generated` option
