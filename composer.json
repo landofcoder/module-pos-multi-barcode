@@ -1,12 +1,14 @@
 {
-    "name": "lof/module-multibarcode",
-    "description": "",
+    "name": "landofcoder/module-multibarcode",
+    "description": "Generate barcode for multi source stocks (MSI)",
     "type": "magento2-module",
     "license": "MIT",
     "authors": [
         {
-            "email": "info@mage2gen.com",
-            "name": "Mage2Gen"
+            "email": "info@landofcoder.com",
+            "name": "Landofcoder",
+            "homepage": "https://landfocoder.com",
+            "role": "Magento 2 Solution Provider"
         }
     ],
     "minimum-stability": "dev",
