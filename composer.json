@@ -5,10 +5,10 @@
     "license": "MIT",
     "authors": [
         {
-            "email": "info@landofcoder.com",
             "name": "Landofcoder",
-            "homepage": "https://landfocoder.com",
-            "role": "Magento 2 Solution Provider"
+            "email": "info@landofcoder.com",
+            "homepage": "https://landofcoder.com",
+            "role": "Magento 2 Solution and Extensions Provider"
         }
     ],
     "minimum-stability": "dev",
